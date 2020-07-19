@@ -1,173 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:fillViewport="true">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable name="myName" type="String"/>
+        <variable name="myPhone" type="String"/>
+        <variable name="myAddress" type="String"/>
+        <variable name="myCity" type="String"/>
+        <variable name="myZip" type="String"/>
+        <variable name="myEmail" type="String"/>
+        <variable name="myBirthday" type="String"/>
+
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/constraint_layout1"
-        >
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:fillViewport="true">
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/name"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            android:inputType="textPersonName"
-            android:padding="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/phone"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:startIconDrawable="@drawable/ic_sharp_person_24">
+            android:id="@+id/constraint_layout1">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editName"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name"
+                android:text="@{myName}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/phone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:startIconDrawable="@drawable/ic_sharp_person_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone"
+                android:text="@{myPhone}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="Phone"
+                android:inputType="phone"
+                android:padding="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/address"
+                app:startIconDrawable="@drawable/ic_baseline_local_phone_24">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/address"
+                android:text="@{myAddress}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                android:inputType="textPostalAddress"
+                android:padding="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/phone"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/city"
+                app:startIconDrawable="@drawable/ic_baseline_location_on_24">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone"
-        android:inputType="phone"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/address"
-        app:startIconDrawable="@drawable/ic_baseline_local_phone_24">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Address"
-        android:inputType="textPostalAddress"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/phone"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/city"
-        app:startIconDrawable="@drawable/ic_baseline_location_on_24">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/city"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="City"
-        android:inputType="text"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/address"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/zip">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/city"
+                android:text="@{myCity}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="City"
+                android:inputType="text"
+                android:padding="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/address"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/zip">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editCity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/zip"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/zip"
-        android:inputType="number"
-        android:padding="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/city"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editZip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textWebEmailAddress"
-        android:padding="12dp"
-        app:startIconDrawable="@drawable/ic_baseline_cake_24"
-        app:layout_constraintBottom_toTopOf="@+id/birthday"
-        app:layout_constraintTop_toBottomOf="@+id/zip"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/zip"
+                android:text="@{myZip}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/zip"
+                android:inputType="number"
+                android:padding="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/email"
+                app:layout_constraintTop_toBottomOf="@+id/city"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/birthday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Birthday"
-        android:inputType="date"
-        android:padding="12dp"
-        app:startIconDrawable="@drawable/ic_baseline_email_24"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_baseline_calendar_today_24"
-        app:layout_constraintBottom_toTopOf="@+id/saveButton"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editBirthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editZip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save_Button"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/birthday"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email"
+                android:text="@{myEmail}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textWebEmailAddress"
+                android:padding="12dp"
+                app:startIconDrawable="@drawable/ic_baseline_cake_24"
+                app:layout_constraintBottom_toTopOf="@+id/birthday"
+                app:layout_constraintTop_toBottomOf="@+id/zip"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-</ScrollView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/birthday"
+                android:text="@{myBirthday}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Birthday"
+                android:inputType="date"
+                android:padding="12dp"
+                app:startIconDrawable="@drawable/ic_baseline_email_24"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_baseline_calendar_today_24"
+                app:layout_constraintBottom_toTopOf="@+id/saveButton"
+                app:layout_constraintTop_toBottomOf="@+id/email"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editBirthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_Button"
+                android:padding="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/birthday"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
