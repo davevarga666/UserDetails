@@ -7,35 +7,62 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.room.Room
+import com.davevarga.userdetails.databinding.ActivityMainBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var definedUser: User
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val btn_save = findViewById(R.id.saveButton) as Button
+        val intent = Intent(this, DetailsActivity::class.java)
+        binding = DataBindingUtil.setContentView(
+            this, R.layout.activity_main
+        )
+
+        var db=AppDatabase.getInstance(this)
 
 
-        btn_save.setOnClickListener {
-            val myName = findViewById<TextInputEditText>(R.id.editName).text.toString()
-            val myPhone = findViewById<TextInputEditText>(R.id.editPhone).text.toString()
-            val myAddress = findViewById<TextInputEditText>(R.id.editAddress).text.toString()
-            val myCity = findViewById<TextInputEditText>(R.id.editCity).text.toString()
-            val myZip = findViewById<TextInputEditText>(R.id.editZip).text.toString()
-            val myEmail = findViewById<TextInputEditText>(R.id.editEmail).text.toString()
-            val myBirthday = findViewById<TextInputEditText>(R.id.editBirthday).text.toString()
+        binding.saveButton.setOnClickListener {
+            val myName = binding.editName.text.toString()
+            val myPhone = binding.editPhone.text.toString()
+            val myAddress = binding.editAddress.text.toString()
+            val myCity = binding.editCity.text.toString()
+            val myZip = binding.editZip.text.toString()
+            val myEmail = binding.editEmail.text.toString()
+            val myBirthday = binding.editBirthday.text.toString()
 
-            val user = User(myName, myPhone, myAddress, myCity, myZip, myEmail, myBirthday)
-            val intent =
-                Intent(this, DetailsActivity::class.java).apply { putExtra("userDetails", user) }
-            startActivity(intent)
+
+
+            definedUser = User(myName, myPhone, myAddress, myCity, myZip, myEmail, myBirthday)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                db.userDao().insertUser(definedUser)
+                startActivity(intent)
+            }
+//            GlobalScope.launch {
+//                db.userDao().insertUser(definedUser)
+//                startActivity(intent)
+//            }
+//            db.userDao().insertUser(definedUser)
+
+
         }
+//
     }
 
 
 }
+
+
