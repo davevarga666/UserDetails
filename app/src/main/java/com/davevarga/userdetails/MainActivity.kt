@@ -16,12 +16,12 @@ import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import java.util.*
+import java.util.Calendar.MONDAY
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var definedUser: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,35 +31,49 @@ class MainActivity : AppCompatActivity() {
             this, R.layout.activity_main
         )
 
-        var db=AppDatabase.getInstance(this)
+        val db = AppDatabase.getInstance(this)
+        editBirthday.setOnClickListener { datePick() }
 
 
         binding.saveButton.setOnClickListener {
-            val myName = binding.editName.text.toString()
-            val myPhone = binding.editPhone.text.toString()
-            val myAddress = binding.editAddress.text.toString()
-            val myCity = binding.editCity.text.toString()
-            val myZip = binding.editZip.text.toString()
-            val myEmail = binding.editEmail.text.toString()
-            val myBirthday = binding.editBirthday.text.toString()
 
 
+            val myName = editName.text.toString()
+            val myPhone = editPhone.text.toString()
+            val myAddress = editAddress.text.toString()
+            val myCity = editCity.text.toString()
+            val myZip = editZip.text.toString()
+            val myEmail = editEmail.text.toString()
+            val myBirthday = editBirthday.text.toString()
 
-            definedUser = User(myName, myPhone, myAddress, myCity, myZip, myEmail, myBirthday)
+
+            val definedUser =
+                User(1, myName, myPhone, myAddress, myCity, myZip, myEmail, myBirthday)
 
             CoroutineScope(Dispatchers.IO).launch {
                 db.userDao().insertUser(definedUser)
                 startActivity(intent)
             }
-//            GlobalScope.launch {
-//                db.userDao().insertUser(definedUser)
-//                startActivity(intent)
-//            }
-//            db.userDao().insertUser(definedUser)
 
 
         }
-//
+    }
+
+    fun datePick() {
+        val cal = Calendar.getInstance()
+        val year = cal.get(Calendar.YEAR)
+        val month = cal.get(Calendar.MONTH)
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog =
+            DatePickerDialog(
+                this@MainActivity, DatePickerDialog.OnDateSetListener
+                { view, year, monthOfYear, dayOfMonth ->
+                    // TOODO : Add the date to text view
+                    editBirthday.setText("" + year + "-" + monthOfYear + "-" + dayOfMonth)
+                }, year, month, day
+            )
+        datePickerDialog.show()
     }
 
 

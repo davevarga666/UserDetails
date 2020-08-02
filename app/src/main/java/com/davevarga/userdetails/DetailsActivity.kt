@@ -10,7 +10,7 @@ import kotlinx.coroutines.*
 class DetailsActivity : AppCompatActivity() {
 
     private lateinit var displayedUser: User
-    var db= AppDatabase.getInstance(this)
+    val db = AppDatabase.getInstance(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,25 +28,6 @@ class DetailsActivity : AppCompatActivity() {
                 textView_birthday.setText(birthday)
             }
         }
-
-//        GlobalScope.launch {
-//            displayedUser = db.userDao().getUser()
-//            displayedUser.apply {
-//                textView_name.setText(name)
-//                textView_phone.setText(phone)
-//                textView_address.setText(address)
-//                textView_city.setText(city)
-//                textView_zip.setText(zip)
-//                textView_email.setText(email)
-//                textView_birthday.setText(birthday)
-//            }
-//        }
-
-
-
-
-
-
 
 
     }

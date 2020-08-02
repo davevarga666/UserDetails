@@ -1,5 +1,7 @@
 package com.davevarga.userdetails
 
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,7 +9,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "userTable")
 data class User(
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
+    @ColumnInfo(name = "id")
+    val id: Int,
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "phone")
