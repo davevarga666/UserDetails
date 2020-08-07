@@ -4,27 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="user" type="com.davevarga.userdetails.User"/>
+
+        <variable
+            name="userViewModel"
+            type="com.davevarga.userdetails.UserViewModel" />
 
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        tools:context=".MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/constraint_layout1">
+            android:layout_height="wrap_content">
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Name"
+                android:hint="@string/Name"
                 android:inputType="textPersonName"
                 android:padding="12dp"
                 app:layout_constraintBottom_toTopOf="@+id/phone"
@@ -36,9 +39,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editName"
-                    android:text="@{user.name}"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="@={userViewModel.userList[0].name}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,40 +50,40 @@
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Phone"
+                android:hint="@string/phone"
                 android:padding="12dp"
-                app:layout_constraintTop_toBottomOf="@+id/name"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/address"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name"
                 app:startIconDrawable="@drawable/ic_baseline_local_phone_24">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editPhone"
-                    android:text="@{user.phone}"
-                    android:inputType="phone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:text="@={userViewModel.userList[0].phone}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Address"
+                android:hint="@string/address"
                 android:padding="12dp"
-                app:layout_constraintTop_toBottomOf="@+id/phone"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/city"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone"
                 app:startIconDrawable="@drawable/ic_baseline_location_on_24">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editAddress"
-                    android:text="@{user.address}"
-                    android:inputType="textPostalAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress"
+                    android:text="@={userViewModel.userList[0].address}" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -88,19 +91,19 @@
                 android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="City"
+                android:hint="@string/city"
                 android:inputType="text"
                 android:padding="12dp"
-                app:layout_constraintTop_toBottomOf="@+id/address"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/zip"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/zip">
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editCity"
-                    android:text="@{user.city}"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="@={userViewModel.userList[0].city}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,16 +115,16 @@
                 android:hint="@string/zip"
                 android:padding="12dp"
                 app:layout_constraintBottom_toTopOf="@+id/email"
-                app:layout_constraintTop_toBottomOf="@+id/city"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/city">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editZip"
-                    android:text="@{user.zip}"
-                    android:inputType="number"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@={userViewModel.userList[0].zip}" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -129,21 +132,21 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textWebEmailAddress"
                 android:padding="12dp"
-                app:startIconDrawable="@drawable/ic_baseline_email_24"
                 app:layout_constraintBottom_toTopOf="@+id/birthday"
-                app:layout_constraintTop_toBottomOf="@+id/zip"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/zip"
+                app:startIconDrawable="@drawable/ic_baseline_email_24">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editEmail"
-                    android:text="@{user.email}"
-                    android:inputType="textWebEmailAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:text="@={userViewModel.userList[0].email}" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -151,23 +154,23 @@
                 android:id="@+id/birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Birthday"
+                android:hint="@string/birthday"
                 android:padding="12dp"
-                app:startIconDrawable="@drawable/ic_baseline_cake_24"
-                app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_baseline_calendar_today_24"
+                app:endIconMode="custom"
                 app:layout_constraintBottom_toTopOf="@+id/saveButton"
-                app:layout_constraintTop_toBottomOf="@+id/email"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/email"
+                app:startIconDrawable="@drawable/ic_baseline_cake_24">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editBirthday"
-                    android:text="@{user.birthday}"
-                    android:inputType="none"
-                    android:focusable="false"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:text="@={userViewModel.userList[0].birthday}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -176,12 +179,12 @@
                 android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save_Button"
                 android:padding="12dp"
-                app:layout_constraintTop_toBottomOf="@+id/birthday"
+                android:text="@string/save_Button"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/birthday" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

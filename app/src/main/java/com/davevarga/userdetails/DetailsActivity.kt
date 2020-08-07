@@ -4,30 +4,31 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProviders
+import com.davevarga.userdetails.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.coroutines.*
 
 class DetailsActivity : AppCompatActivity() {
 
-    private lateinit var displayedUser: User
     val db = AppDatabase.getInstance(this)
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        binding = DataBindingUtil.setContentView(
+            this, R.layout.activity_detail
+        )
+        viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        binding.lifecycleOwner = this
+        binding.userViewModel = viewModel
 
-        CoroutineScope(Dispatchers.Main).launch {
-            displayedUser = db.userDao().getUser()
-            displayedUser.apply {
-                textView_name.setText(name)
-                textView_phone.setText(phone)
-                textView_address.setText(address)
-                textView_city.setText(city)
-                textView_zip.setText(zip)
-                textView_email.setText(email)
-                textView_birthday.setText(birthday)
-            }
-        }
+        binding.userViewModel.userList = db.userDao().getUsers()
+
 
 
     }

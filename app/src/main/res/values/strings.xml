@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">UserDetails</string>
-    <string name="name">Name</string>
     <string name="birthday">Birthday</string>
     <string name="save_Button">SAVE</string>
     <string name="zip">Zip</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="email">Email</string>
+    <string name="Name">UserName</string>
 </resources>
