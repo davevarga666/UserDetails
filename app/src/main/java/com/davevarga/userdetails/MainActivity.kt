@@ -4,55 +4,71 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import androidx.room.Room
 import com.davevarga.userdetails.databinding.ActivityMainBinding
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
 import java.util.*
-import java.util.Calendar.MONDAY
-import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: UserViewModel
+    private lateinit var viewModelFactory: UserViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val intent = Intent(this, DetailsActivity::class.java)
+//        setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(
             this, R.layout.activity_main
         )
 
-        viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
-        binding.setLifecycleOwner(this)
-        binding.userViewModel = viewModel
+        val intent = Intent(this, DetailsActivity::class.java)
 
 
-        val db = AppDatabase.getInstance(this)
+
+        viewModelFactory = UserViewModelFactory(application)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
+
+        viewModel.user.observe(this, androidx.lifecycle.Observer<User> { userDetails ->
+            userDetails.apply {
+                binding.userInfo = userDetails
+            }
+        })
+
         editBirthday.setOnClickListener { datePick() }
 
+//        binding.userInfo = viewModel
+//        binding.setLifecycleOwner(this)
+        Log.i("MainActivity", "editbirthday set")
 
+
+//        clearTextFields()
         binding.saveButton.setOnClickListener {
+            viewModel.insert(
+                User(
+                    editName.text.toString(),
+                    editPhone.text.toString(),
+                    editAddress.text.toString(),
+                    editCity.text.toString(),
+                    editZip.text.toString(),
+                    editEmail.text.toString(),
+                    editBirthday.text.toString()
+                )
+            )
 
-            CoroutineScope(Dispatchers.IO).launch {
-                val user = binding.userViewModel.userList[.value?.get(0]
-                db.userDao().insertUser(user!!)
-                startActivity(intent)
-            }
+            startActivity(intent)
 
+//            CoroutineScope(Dispatchers.IO).launch {
+//                val user = binding.userViewModel.userList[.value?.get(0]
+//                db.userDao().insertUser(user!!)
+//
+//            }
 
 
         }
+
     }
 
     fun datePick() {
@@ -71,7 +87,20 @@ class MainActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
+    fun clearTextFields() {
+        editName.setText("")
+        editPhone.setText("")
+        editAddress.setText("")
+        editCity.setText("")
+        editZip.setText("")
+        editEmail.setText("")
+        editBirthday.setText("")
+
+    }
+
 
 }
+
+
 
 
