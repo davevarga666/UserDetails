@@ -1,12 +1,18 @@
 package com.davevarga.userdetails
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
-
-@Entity(tableName = "user_table")
+@Parcelize
+@Entity(tableName = "the_user_table")
 data class User(
+
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
+
     @ColumnInfo(name = "name")
     var name: String,
 
@@ -27,8 +33,4 @@ data class User(
 
     @ColumnInfo(name = "birthday")
     var birthday: String
-) {
-
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
-}
+) : Parcelable

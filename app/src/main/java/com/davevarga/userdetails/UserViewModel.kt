@@ -13,7 +13,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     init {
         val userDao = AppDatabase.getInstance(application).userDao()
         repository = UserRepository(userDao)
-        //ITT LEHET A KUTYA ELASVA
         user = repository.getUser()
     }
 

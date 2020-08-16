@@ -1,5 +1,6 @@
 package com.davevarga.userdetails
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -23,25 +24,26 @@ import kotlinx.coroutines.*
 
 class DetailsActivity : AppCompatActivity() {
 
+
     private lateinit var binding: ActivityDetailBinding
     private lateinit var viewModel: UserViewModel
     private lateinit var viewModelFactory: UserViewModelFactory
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(
             this, R.layout.activity_detail
         )
-        viewModelFactory = UserViewModelFactory(application)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(UserViewModel::class.java)
 
-        viewModel.user.observe(this, androidx.lifecycle.Observer<User> { userDetails ->
-            userDetails.apply {
-                binding.user = userDetails
-            }
-        })
-        binding.user = viewModel.user.value
+//        viewModelFactory = UserViewModelFactory(application)
+//        viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
+        val user = getIntent().getParcelableExtra<User>("userDetails")
+        //intent.extras.get("userDetails")
+
+        binding.user = user
 
 
     }
+
 }

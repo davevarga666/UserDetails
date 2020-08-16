@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.davevarga.userdetails.databinding.ActivityMainBinding
@@ -13,59 +14,37 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    companion object UserDetails {
+        lateinit var newUser: User
+    }
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: UserViewModel
     private lateinit var viewModelFactory: UserViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(
             this, R.layout.activity_main
         )
 
         val intent = Intent(this, DetailsActivity::class.java)
 
-
-
         viewModelFactory = UserViewModelFactory(application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
 
-        viewModel.user.observe(this, androidx.lifecycle.Observer<User> { userDetails ->
-            userDetails.apply {
-                binding.userInfo = userDetails
+        editBirthday.setOnClickListener { datePick() }
+
+        viewModel.user.observe(this, Observer { user ->
+            user?.apply {
+                binding.userInfo = user
+
             }
         })
 
-        editBirthday.setOnClickListener { datePick() }
-
-//        binding.userInfo = viewModel
-//        binding.setLifecycleOwner(this)
-        Log.i("MainActivity", "editbirthday set")
-
-
-//        clearTextFields()
         binding.saveButton.setOnClickListener {
-            viewModel.insert(
-                User(
-                    editName.text.toString(),
-                    editPhone.text.toString(),
-                    editAddress.text.toString(),
-                    editCity.text.toString(),
-                    editZip.text.toString(),
-                    editEmail.text.toString(),
-                    editBirthday.text.toString()
-                )
-            )
-
+            intent.putExtra("userDetails", binding.userInfo)
             startActivity(intent)
-
-//            CoroutineScope(Dispatchers.IO).launch {
-//                val user = binding.userViewModel.userList[.value?.get(0]
-//                db.userDao().insertUser(user!!)
-//
-//            }
-
 
         }
 
@@ -85,17 +64,6 @@ class MainActivity : AppCompatActivity() {
                 }, year, month, day
             )
         datePickerDialog.show()
-    }
-
-    fun clearTextFields() {
-        editName.setText("")
-        editPhone.setText("")
-        editAddress.setText("")
-        editCity.setText("")
-        editZip.setText("")
-        editEmail.setText("")
-        editBirthday.setText("")
-
     }
 
 
