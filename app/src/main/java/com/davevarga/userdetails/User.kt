@@ -14,23 +14,23 @@ data class User(
     var id: Int = 0,
 
     @ColumnInfo(name = "name")
-    var name: String,
+    var name: String = "",
 
     @ColumnInfo(name = "phone")
-    var phone: String,
+    var phone: String = "",
 
     @ColumnInfo(name = "address")
-    var address: String,
+    var address: String = "",
 
     @ColumnInfo(name = "city")
-    var city: String,
+    var city: String = "",
 
     @ColumnInfo(name = "zip")
-    var zip: String,
+    var zip: String = "",
 
     @ColumnInfo(name = "email")
-    var email: String,
+    var email: String = "",
 
     @ColumnInfo(name = "birthday")
-    var birthday: String
+    var birthday: String = ""
 ) : Parcelable
