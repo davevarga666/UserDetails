@@ -1,13 +1,14 @@
 package com.davevarga.userdetails
 
 import android.app.Application
+import android.content.ClipData
 import androidx.lifecycle.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
 
-    val repository: UserRepository
+    private val repository: UserRepository
     val user: LiveData<User>
 
     init {
