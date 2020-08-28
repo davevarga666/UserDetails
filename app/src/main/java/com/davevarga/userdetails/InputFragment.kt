@@ -25,7 +25,7 @@ import java.util.*
 class InputFragment : Fragment() {
 
     private lateinit var binding: FragmentInputBinding
-    private val viewModel: UserViewModel by activityViewModels()
+    private lateinit var viewModel: UserViewModel
 
 //    private val viewModelFactory: UserViewModelFactory by lazy {
 //        UserViewModelFactory(Application())
@@ -44,6 +44,10 @@ class InputFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = activity?.run {
+            ViewModelProviders.of(this).get(UserViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
 
         binding.editBirthday.setOnClickListener { datePick() }
 
