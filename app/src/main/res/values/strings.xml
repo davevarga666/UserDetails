@@ -10,4 +10,8 @@
     <string name="Name">UserName</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="photoID">photoId</string>
+    <string name="take_photo">take photo</string>
+    <string name="expand_image">expand_image</string>
+    <string name="description_zoom_touch_close">zoom</string>
 </resources>

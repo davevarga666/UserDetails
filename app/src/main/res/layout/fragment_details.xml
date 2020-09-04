@@ -8,7 +8,7 @@
         <variable
 
             name="user"
-            type="com.davevarga.userdetails.User" />
+            type="com.davevarga.userdetails.models.User" />
 
     </data>
 
@@ -16,12 +16,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        tools:context=".DetailsFragment">
+        tools:context=".ui.DetailsFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/photoID"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="16dp"
+                android:contentDescription="@string/photoID"
+                android:scaleType="fitCenter"
+                app:imageUrl="@{user.photoID}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/name" />
+
+            <ImageView
+                android:id="@+id/expanded_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                android:elevation="10dp"
+                android:contentDescription="@string/description_zoom_touch_close" />
 
 
             <com.google.android.material.textfield.TextInputLayout

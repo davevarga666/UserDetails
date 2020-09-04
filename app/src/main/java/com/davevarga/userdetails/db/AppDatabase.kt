@@ -1,4 +1,4 @@
-package com.davevarga.userdetails
+package com.davevarga.userdetails.db
 
 import android.content.Context
 import androidx.room.Database
@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.davevarga.userdetails.models.User
 
 @Database(entities = arrayOf(User::class), version = 2, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {

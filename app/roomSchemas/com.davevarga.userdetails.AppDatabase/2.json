@@ -2,16 +2,22 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "f12ad4744c8aed408432f800830bccee",
+    "identityHash": "448323601ea5260ab9f823c93cb9494a",
     "entities": [
       {
         "tableName": "the_user_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `phone` TEXT NOT NULL, `address` TEXT NOT NULL, `city` TEXT NOT NULL, `zip` TEXT NOT NULL, `email` TEXT NOT NULL, `birthday` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `photoID` TEXT NOT NULL, `name` TEXT NOT NULL, `phone` TEXT NOT NULL, `address` TEXT NOT NULL, `city` TEXT NOT NULL, `zip` TEXT NOT NULL, `email` TEXT NOT NULL, `birthday` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "photoID",
+            "columnName": "photoID",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -70,7 +76,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f12ad4744c8aed408432f800830bccee')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '448323601ea5260ab9f823c93cb9494a')"
     ]
   }
 }

@@ -1,9 +1,10 @@
-package com.davevarga.userdetails
+package com.davevarga.userdetails.ui
 
 import android.app.Application
-import android.content.ClipData
 import androidx.lifecycle.*
-import kotlinx.coroutines.delay
+import com.davevarga.userdetails.models.User
+import com.davevarga.userdetails.repo.UserRepository
+import com.davevarga.userdetails.db.AppDatabase
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
@@ -16,6 +17,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         repository = UserRepository(userDao)
         user = repository.getUser()
     }
+
 
     fun insert(user: User) {
         viewModelScope.launch {

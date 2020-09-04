@@ -1,7 +1,8 @@
-package com.davevarga.userdetails
+package com.davevarga.userdetails.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.davevarga.userdetails.models.User
 
 @Dao
 interface UserDao {

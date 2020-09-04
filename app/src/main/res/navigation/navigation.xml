@@ -6,7 +6,7 @@
     app:startDestination="@id/inputFragment">
     <fragment
         android:id="@+id/inputFragment"
-        android:name="com.davevarga.userdetails.InputFragment"
+        android:name="com.davevarga.userdetails.ui.InputFragment"
         android:label="InputFragment"
         tools:layout="@layout/fragment_input" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.davevarga.userdetails.DetailsFragment"
+        android:name="com.davevarga.userdetails.ui.DetailsFragment"
         android:label="DetailsFragment"
         tools:layout="@layout/fragment_details"/>
 </navigation>
